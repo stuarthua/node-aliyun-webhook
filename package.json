@@ -1,0 +1,27 @@
+{
+  "name": "node-aliyun-webhook",
+  "version": "0.0.1",
+  "description": "Aliyun Webhooks handler based on Node.js. Support multiple handlers.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/stuarthua/node-aliyun-webhook.git"
+  },
+  "keywords": [
+    "Aliyun",
+    "Webhooks",
+    "Node.js"
+  ],
+  "author": "stuarthua",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/stuarthua/node-aliyun-webhook/issues"
+  },
+  "homepage": "https://github.com/stuarthua/node-aliyun-webhook#readme",
+  "dependencies": {
+    "bl": "^1.2.0"
+  }
+}
