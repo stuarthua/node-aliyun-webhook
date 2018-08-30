@@ -1,8 +1,10 @@
 /**
- * Aliyun Webhooks handler
+ * Gitlab(Aliyun Code) Webhooks handler
 */
 
 var EventEmitter = require('events').EventEmitter
+var inherits = require('util').inherits
+var crypto = require('crypto')
 var bl = require('bl')
 
 function isObject(obj) {
@@ -43,11 +45,6 @@ function create(options) {
         throw new TypeError('must provide a \'path\' option')
     }
 
-    var method = req.method.toLowerCase()
-    if (method != 'post') {
-      return hasError('http request must use post method')
-    }
-
     var currentOptions
     if (Array.isArray(options)) {
       currentOptions = findHandler(req.url, options)
@@ -57,24 +54,18 @@ function create(options) {
 
     checkType(currentOptions)
 
-    if (req.url.split('?').shift() !== currentOptions.path)
+    if (req.url.split('?').shift() !== currentOptions.path || req.method !== 'POST')
       return callback()
-    
-    var r_uuid = req.headers['x-request-uuid']
-    var h_uuid = req.headers['x-hook-uuid']
-    var event = req.headers['x-event-key']
 
-    if (!r_uuid)
-      return hasError('No X-Request-UUID found on request')
+    var event = req.headers['x-gitlab-event']
+    var events = currentOptions.events
 
     if (!event)
-      return hasError('No X-Event-Key found on request')
+      return hasError('No X-Gitlab-Event found on request')
 
-    if (!h_uuid)
-      return hasError('No X-Hook-UUID found on request')
+    if (events && events.indexOf(event) === -1)
+      return hasError('X-Gitlab-Event is not acceptable')
 
-    event = event.replace('repo:','')
-    
     req.pipe(bl(function(err, data) {
       if (err)
         return hasError(err.message)
@@ -87,8 +78,10 @@ function create(options) {
         return hasError(e)
       }
 
-      res.writeHead(200, { 'content-type': 'application/json' })
-      res.end('{"ok":true}')
+      var event = obj.object_kind
+
+     res.writeHead(200, { 'content-type': 'application/json' })
+     res.end('{"ok":true}')
 
       var emitData = {
         event: event,

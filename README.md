@@ -6,7 +6,7 @@
 
 这个库受到[github-webhook-handler](https://github.com/rvagg/github-webhook-handler)启发而来，它支持你为多个仓库同时设置钩子。
 
-该库基于 `Node.js` ，能帮你处理所有来自Github的webhooks请求。
+该库基于 `Node.js` ，能帮你处理所有来自 Aliyun code 的 webhooks 请求。
 
 如果你想要了解 Aliyun 的 Webhooks ，请看：[Web hooks](https://code.aliyun.com/help/web_hooks/web_hooks)。
 
@@ -14,13 +14,13 @@
 
 ## 安装
 
-`npm install node-bitbucket-webhook --save`
+`npm install node-aliyun-webhook --save`
 
 ## 使用
 
 ```js
 var http = require('http')
-var createHandler = require('node-bitbucket-webhook')
+var createHandler = require('node-aliyun-webhook')
 var handler = createHandler([ // 多个仓库
   { path: '/webhook1' },
   { path: '/webhook2' }
