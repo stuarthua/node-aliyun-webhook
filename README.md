@@ -57,8 +57,3 @@ handler.on('push', function (event) {
   }
 })
 ```
-
-## 仓库
-
-* [github.node-bitbucket-webhook](https://github.com/stuarthua/node-bitbucket-webhook)
-* [bitbucket.node-bitbucket-webhook](https://bitbucket.org/stuarthua/node-bitbucket-webhook/)

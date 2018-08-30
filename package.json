@@ -1,6 +1,6 @@
 {
   "name": "node-aliyun-webhook",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Aliyun Webhooks handler based on Node.js. Support multiple handlers.",
   "main": "index.js",
   "scripts": {
